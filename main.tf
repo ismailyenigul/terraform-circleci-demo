@@ -7,7 +7,7 @@ terraform {
   backend "s3" {
     bucket = "tf-remote-state20200716142227954700000002"
     key    = "terraform/circlecitest/terraform.tfstate"
-    region = "us-east-1"
+    region = "us-east-2"
   }
 }
 
