@@ -6,9 +6,9 @@ terraform {
   }
   backend "s3" {
     bucket = "tf-remote-state20200716142227954700000002"
-    key    = "terraform/webapp/terraform.tfstate"
-    region = "eu-west-1"
- }
+    key    = "terraform/circlecitest/terraform.tfstate"
+    region = "us-east-1"
+  }
 }
 
 
@@ -21,12 +21,12 @@ data "aws_vpc" "default" {
 }
 
 module "complete_sg" {
-  source = "terraform-aws-modules/security-group/aws"
-  name            = "my-sg-test-ismail"
-  vpc_id          = data.aws_vpc.default.id
-  use_name_prefix = true
+  source              = "terraform-aws-modules/security-group/aws"
+  name                = "my-sg-test-ismail"
+  vpc_id              = data.aws_vpc.default.id
+  use_name_prefix     = true
   ingress_cidr_blocks = ["10.10.0.0/16"]
-  ingress_rules = ["https-443-tcp"]
+  ingress_rules       = ["https-443-tcp"]
 }
 
 output "this_security_group_id" {
