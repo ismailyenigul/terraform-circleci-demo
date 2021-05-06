@@ -4,14 +4,14 @@ jobs:
   plan-apply:
     working_directory: /tmp/project
     docker:
-      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+      - image: docker.mirror.hashicorp.services/hashicorp/terraform:0.13.7
     steps:
       - checkout
       - run:
           name: terraform init & plan
           command: |
             terraform init -input=false
-            terraform plan -out tfapply -var-file variables.tfvars
+            terraform plan -out tfapply 
       - persist_to_workspace:
           root: .
           paths:
@@ -19,7 +19,7 @@ jobs:
 
   apply:
     docker:
-      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+      - image: docker.mirror.hashicorp.services/hashicorp/terraform:0.13.7
     steps:
       - attach_workspace:
           at: .
@@ -34,14 +34,14 @@ jobs:
 
   plan-destroy:
     docker:
-      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+      - image: docker.mirror.hashicorp.services/hashicorp/terraform:0.13.7
     steps:
       - attach_workspace:
           at: .
       - run:
           name: terraform create destroy plan
           command: |
-            terraform plan -destroy -out tfdestroy -var-file variables.tfvars
+            terraform plan -destroy -out tfdestroy 
       - persist_to_workspace:
           root: .
           paths:
@@ -49,7 +49,7 @@ jobs:
 
   destroy:
     docker:
-      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+      - image: docker.mirror.hashicorp.services/hashicorp/terraform:0.13.7
     steps:
       - attach_workspace:
           at: .
