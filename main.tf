@@ -28,8 +28,3 @@ module "complete_sg" {
   ingress_cidr_blocks = ["10.10.0.0/16"]
   ingress_rules       = ["https-443-tcp"]
 }
-
-output "this_security_group_id" {
-  description = "The ID of the security group"
-  value       = module.complete_sg.this_security_group_id
-}
