@@ -21,7 +21,8 @@ data "aws_vpc" "default" {
 }
 
 module "complete_sg" {
-  source              = "terraform-aws-modules/security-group/aws"
+  // source              = "terraform-aws-modules/security-group/aws"
+  source              = "git::git@github.com:/terraform-aws-modules/terraform-aws-security-group.git?ref=v4.0.0"
   name                = "my-sg-test-ismail"
   vpc_id              = data.aws_vpc.default.id
   use_name_prefix     = true
